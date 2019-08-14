@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<MageDeveloper_Logging>
-			<version>1.1.1</version>
+			<version>1.2.0</version>
 		</MageDeveloper_Logging>
 	</modules>
 	<global>
@@ -60,7 +60,6 @@
             </logging>
         </routers>
 	</frontend>
-	
 	
     <admin>
         <routers>

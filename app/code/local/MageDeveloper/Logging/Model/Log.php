@@ -46,5 +46,27 @@ class MageDeveloper_Logging_Model_Log extends Mage_Core_Model_Abstract
         return $errors;
 	}
 	
+	/**
+	 * Get the log type html code
+	 * 
+	 * @return string HTML Code
+	 */
+	public function getLogTypeHtml()
+	{
+		$type = $this->getLogType();
+		$helper = Mage::helper('logging/logtype');
+		return $helper->getLogTypeStyle($type);
+	}
+	
+	/**
+	 * Get a formated timestamp
+	 * 
+	 * @return string
+	 */
+	public function getFormatedTimestamp($format = 'long', $includeDate = true)
+	{
+		return Mage::helper('core')->formatTime($this->getTimestamp(), $format, $includeDate);
+	}
+	
 	
 }

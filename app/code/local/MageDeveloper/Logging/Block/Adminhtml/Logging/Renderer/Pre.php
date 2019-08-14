@@ -20,7 +20,11 @@ class MageDeveloper_Logging_Block_Adminhtml_Logging_Renderer_Pre extends Mage_Ad
 	 */
 	public function render(Varien_Object $row)
 	{
+		$content = '';
+		
 		$rowContent = $row->getData( $this->getColumn()->getIndex() );
-		return '<pre>'.$rowContent.'</pre>';
+		$content = '<code>'.$rowContent.'</code>';
+		
+		return $content;
 	}
 }

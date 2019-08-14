@@ -2,7 +2,19 @@
 <layout>
     <adminhtml_logging_index>
         <reference name="content">
-            <block type="logging/adminhtml_logging" name="logging" />
+            <block type="logging/adminhtml_logging" name="logging.grid" />
         </reference>
     </adminhtml_logging_index>
+    
+    <adminhtml_logging_view>
+    	<reference name="content">
+    		<block type="logging/adminhtml_logging_view" name="logging.view" />
+    	</reference>
+    </adminhtml_logging_view>
+    
+    <adminhtml_logging_compare>
+    	<reference name="content">
+    		<block type="logging/adminhtml_logging_compare" name="logging.compare" />
+    	</reference>
+    </adminhtml_logging_compare>
 </layout>

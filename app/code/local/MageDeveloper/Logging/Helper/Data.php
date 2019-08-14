@@ -87,6 +87,50 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 	}
 	
 	/**
+	 * Set OK Type
+	 * 
+	 * @return self
+	 */
+	public function setTypeOk()
+	{
+		$this->setType( $this->getTypeOk() );
+		return $this;
+	}
+	
+	/**
+	 * Set INFO Type
+	 * 
+	 * @return self
+	 */
+	public function setTypeInfo()
+	{
+		$this->setType( $this->getTypeInfo() );
+		return $this;
+	}	
+	
+	/**
+	 * Set WARNING Type
+	 * 
+	 * @return self
+	 */
+	public function setTypeWarning()
+	{
+		$this->setType( $this->getTypeWarning() );
+		return $this;
+	}
+	
+	/**
+	 * Set ERROR Type
+	 * 
+	 * @return self
+	 */
+	public function setTypeError()
+	{
+		$this->setType( $this->getTypeError() );
+		return $this;
+	}
+	
+	/**
 	 * Get the model for a log entry
 	 * 
 	 * @return MageDeveloper_Logging_Model_Log

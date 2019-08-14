@@ -1,0 +1,82 @@
+<table cellspacing="0" cellpadding="0" class="massaction data">
+	<tbody>
+		<tr>
+    		<td>
+    			<strong>
+    				<?php echo $this->__('Log Entries') ?>
+    			</strong>
+    		</td>
+    		<td>
+        		<div class="right">
+            	<div class="entry-edit">
+				</div>
+				</div>
+    		</td>
+		</tr>
+
+	</tbody>
+</table>
+<?php $logs = $this->getLogEntries(); ?>
+<?php $size = $logs->getSize(); ?>
+<?php $percent = floor(90/$size); ?>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+	<tr valign="middle">
+		<td style="background-color:#f2f2f2;text-align: center;width:100px;vertical-align: middle;">
+			<h4><?php echo $this->__('Log Type'); ?></h4>
+		</td>
+	<?php foreach ($logs as $_log): ?>
+		
+		<td style="border:1px solid #f2f2f2;text-align: center;" width="<?php echo $percent.'%'; ?>">
+			<?php echo $_log->getLogTypeHtml(); ?>
+		</td>
+		
+	<?php endforeach; ?>
+	</tr>
+	<tr valign="middle">
+		<td style="background-color:#f2f2f2;text-align: center;width:100px;vertical-align: middle;">
+			<h4><?php echo $this->__('Timestamp'); ?></h4>
+		</td>
+	<?php foreach ($logs as $_log): ?>
+		
+		<td style="border:1px solid #f2f2f2;text-align: center;" width="<?php echo $percent.'%'; ?>">
+			<?php echo $_log->getFormatedTimestamp(); ?>
+		</td>
+	<?php endforeach; ?>
+	</tr>
+	<tr valign="middle">
+		<td style="background-color:#f2f2f2;text-align: center;width:100px;vertical-align: middle;">
+			<h4><?php echo $this->__('Class'); ?></h4>
+		</td>
+	<?php foreach ($logs as $_log): ?>
+		
+		<td style="border:1px solid #f2f2f2;text-align: center;" width="<?php echo $percent.'%'; ?>">
+			<?php echo $_log->getClass(); ?>
+		</td>
+	<?php endforeach; ?>
+	</tr>
+	<tr valign="middle">
+		<td style="background-color:#f2f2f2;text-align: center;width:100px;vertical-align: middle;">
+			<h4><?php echo $this->__('Method'); ?></h4>
+		</td>
+	<?php foreach ($logs as $_log): ?>
+		
+		<td style="border:1px solid #f2f2f2;text-align: center;" width="<?php echo $percent.'%'; ?>">
+			<?php echo $_log->getMethod(); ?>
+		</td>
+	<?php endforeach; ?>
+	</tr>
+	<tr valign="middle">
+		<td style="background-color:#f2f2f2;text-align: center;width:100px;vertical-align: middle;">
+			<h4><?php echo $this->__('Data'); ?></h4>
+		</td>
+	<?php foreach ($logs as $_log): ?>
+		
+		<td style="border:1px solid #f2f2f2;text-align: center;" width="<?php echo $percent.'%'; ?>">
+			<code><?php echo $_log->getOutput(); ?></code>
+		</td>
+	<?php endforeach; ?>
+	</tr>
+</table>
+
+
+

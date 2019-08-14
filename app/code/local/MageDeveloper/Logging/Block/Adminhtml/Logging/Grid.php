@@ -78,7 +78,7 @@ class MageDeveloper_Logging_Block_Adminhtml_Logging_Grid extends Mage_Adminhtml_
               'width'     => '120px',
               'index'     => 'method',
         ));
-				
+			
         $this->addColumn('output', array(
               'header'    => Mage::helper('logging')->__('Data'),
               'align'     => 'left',
@@ -86,6 +86,27 @@ class MageDeveloper_Logging_Block_Adminhtml_Logging_Grid extends Mage_Adminhtml_
               'index'     => 'output',
               'renderer'  => 'MageDeveloper_Logging_Block_Adminhtml_Logging_Renderer_Pre',
         ));
+		
+		
+        $this->addColumn('action',
+            array(
+                'header'    =>  Mage::helper('logging')->__('Action'),
+                'width'     => '50',
+                'type'      => 'action',
+                'getter'    => 'getId',
+                'actions'   => array(
+                    array(
+                        'caption'   => Mage::helper('logging')->__('View'),
+                        'url'       => array('base'=> '*/*/view'),
+                        'field'     => 'id'
+                    )
+                ),
+                'filter'    => false,
+                'sortable'  => false,
+                'index'     => 'stores',
+                'is_system' => true,
+        ));
+		
         return parent::_prepareColumns();
     }
 
@@ -100,14 +121,24 @@ class MageDeveloper_Logging_Block_Adminhtml_Logging_Grid extends Mage_Adminhtml_
              'url'      => $this->getUrl('*/*/massDelete'),
              'confirm'  => Mage::helper('logging')->__('Are you sure?')
         ));
+		
+        $this->getMassactionBlock()->addItem('compare', array(
+             'label'    => Mage::helper('logging')->__('Compare'),
+             'url'      => $this->getUrl('*/*/compare')
+        ));
 
         return $this;
     }
 
 
+    /**
+     * Return row url for js event handlers
+     *
+     * @return string
+     */
     public function getRowUrl($row)
     {
-        return '';
+        return $this->getUrl('*/*/view', array('id'=>$row->getId()));
     }
 
 }
