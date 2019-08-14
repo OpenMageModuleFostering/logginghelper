@@ -87,6 +87,14 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 	}
 	
 	/**
+	 * Get TIME Type
+	 */
+	public function getTypeTime()
+	{
+		return MageDeveloper_Logging_Model_Log::LOG_TYPE_TIME;
+	}
+	
+	/**
 	 * Set OK Type
 	 * 
 	 * @return self
@@ -127,6 +135,17 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 	public function setTypeError()
 	{
 		$this->setType( $this->getTypeError() );
+		return $this;
+	}
+	
+	/**
+	 * Set TIME Type
+	 * 
+	 * @return self
+	 */
+	public function setTypeTime()
+	{
+		$this->setType( $this->getTypeTime() );
 		return $this;
 	}
 	
@@ -189,6 +208,16 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 	{
 		$this->_logData = $logdata;
 		return $this;
+	}
+	
+	/**
+	 * Get the current set log data
+	 * 
+	 * @return string
+	 */
+	public function getData()
+	{
+		return $this->_logData;
 	}
 	
 	/**
@@ -287,6 +316,52 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 	}	
 	
 	/**
+	 * Creates an formated backtrace string
+	 * 
+	 * @return string
+	 */
+	private function _trace()
+	{
+		$backtrace 		= debug_backtrace();
+		$traceStr 		= '';
+		
+		if ($backtrace) {
+			$i = count($backtrace); 
+			foreach ($backtrace as $_key=>$_trace) {
+				if (array_key_exists('class', $_trace)) {
+					$traceStr .= '#'.$i.'  '.$_trace['class'].'::'.$_trace['function']."\r\n";
+					$i--;
+				}
+			}
+		}
+		return $traceStr;
+	}
+	
+	/**
+	 * Log a timestamp
+	 * 
+	 * @return self
+	 */
+	public function time()
+	{
+		$this->setPrintr();
+		$this->setTypeTime();
+		
+		$timeStr = Mage::helper('logging/log')->udate('H:i:s.u');
+		
+		$message = '';
+		if (!$this->getData()) {
+			$message = $timeStr;
+		} else {
+			$message = $this->getData().' @ '.$timeStr;
+		}
+		
+		$this->setMessage($message);
+		
+		return $this;
+	}
+	
+	/**
 	 * Create log entry
 	 */
 	public function log()
@@ -302,7 +377,7 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 		// last usable backtrace
 		$trace 		= reset($backtrace);
 		$trace 		= next($backtrace);
-		
+
 		// Class
 		if (array_key_exists('class', $trace)) {
 			$this->getLog()
@@ -324,6 +399,11 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 				 ->setMethod($method);
 		}
 		
+		// Data for Backtrace
+		$this->getLog()
+			 ->setTrace( $this->_trace()  );
+		
+		
 		$errors = $this->getLog()->validate();
 
 		if (!is_array($errors)) {
@@ -340,6 +420,12 @@ class MageDeveloper_Logging_Helper_Data extends Mage_Core_Helper_Abstract
 				$id = $this->getLog()->getId();
 				
 				if ($id) {
+					
+					// Check if info mail has to be sent
+					if (Mage::helper('logging/config')->isAllowedToSendMail($this->getLog()->getLogType())) {
+						$this->getLog()->sendLogMail();						
+					}
+					
 					$this->_logModel->unsetData();
 					return $id;
 				}

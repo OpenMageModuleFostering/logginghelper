@@ -60,6 +60,12 @@ class MageDeveloper_Logging_Block_Adminhtml_Logging_View_Form extends Mage_Admin
 		    'value'			=> $log->getOutput()
 		));	
 
+		$fieldset->addField('trace', 'output', array(
+			'label'         => Mage::helper('logging')->__('Backtrace'),
+		    'value'			=> $log->getTrace()
+		));	
+
+
 		
         return parent::_prepareForm();
     }

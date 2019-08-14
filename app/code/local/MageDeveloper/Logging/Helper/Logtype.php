@@ -34,10 +34,28 @@ class MageDeveloper_Logging_Helper_Logtype extends MageDeveloper_Logging_Helper_
 				return Mage::helper('logging')->__('WARNING');
 			case MageDeveloper_Logging_Model_Log::LOG_TYPE_ERROR:
 				return Mage::helper('logging')->__('ERROR');
+			case MageDeveloper_Logging_Model_Log::LOG_TYPE_TIME:
+				return Mage::helper('logging')->__('TIME');
 			case MageDeveloper_Logging_Model_Log::LOG_TYPE_NOT_SET:
 			default:
 				return '';
 		}
+	}
+	
+	/**
+	 * Get all possible log types
+	 * 
+	 * @return array
+	 */
+	public function getLogTypes()
+	{
+		return array(
+			MageDeveloper_Logging_Model_Log::LOG_TYPE_OK 		=> Mage::helper('logging')->__('OK'),
+			MageDeveloper_Logging_Model_Log::LOG_TYPE_INFO		=> Mage::helper('logging')->__('INFO'),
+			MageDeveloper_Logging_Model_Log::LOG_TYPE_WARNING	=> Mage::helper('logging')->__('WARNING'),
+			MageDeveloper_Logging_Model_Log::LOG_TYPE_ERROR		=> Mage::helper('logging')->__('ERROR'),
+			MageDeveloper_Logging_Model_Log::LOG_TYPE_TIME		=> Mage::helper('logging')->__('TIME'),
+		);
 	}
 	
 	/**
@@ -94,6 +112,12 @@ class MageDeveloper_Logging_Helper_Logtype extends MageDeveloper_Logging_Helper_
 				$this->setStyle('background-color', '#ffc5bd');
 				$this->setStyle('color', '#cf1515');
 				$this->setStyle('border', '1px solid #cf1515');
+				break;
+				
+			case MageDeveloper_Logging_Model_Log::LOG_TYPE_TIME:
+				$this->setStyle('background-color','#FEEADA');
+				$this->setStyle('color','#E36A07');
+				$this->setStyle('border','1px solid #F87408');
 				break;
 
 			case MageDeveloper_Logging_Model_Log::LOG_TYPE_NOT_SET:

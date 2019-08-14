@@ -11,7 +11,56 @@
 
 class MageDeveloper_Logging_Helper_Log extends Mage_Core_Helper_Abstract
 {
-
+	/**
+	 * Get a current timestamp
+	 * 
+	 * @return timestamp
+	 */
+	public function now()
+	{
+		return Mage::getModel('core/date')->timestamp( time() );
+	}
+	
+	/**
+	 * Create timestamp from microtime
+	 * 
+	 * @return string
+	 */
+	public function udate($format, $utimestamp = null)
+	{
+	    if (is_null($utimestamp))
+	        $utimestamp = microtime(true);
+	
+	    $timestamp = floor($utimestamp);
+	    $milliseconds = round(($utimestamp - $timestamp) * 1000000);
+	
+	    return date(preg_replace('`(?<!\\\\)u`', $milliseconds, $format), $timestamp);
+	}
+	
+	/**
+	 * Get a timestamp with milliseconds
+	 * 
+	 * @return string
+	 */
+	public function timestamp()
+	{
+		$timestamp = $this->now();
+		$timeStr = Mage::helper('core')->formatTime($timestamp, 'long', true);
+		
+		return utf8_decode($timeStr);
+	}
+	
+	/**
+	 * Get a formated timestamp
+	 * 
+	 * @return string
+	 */
+	public function getFormatedTimestamp($format = 'long', $includeDate = true)
+	{
+		
+	}
+	
+	
 	/**
 	 * Get the next found log entry id
 	 * 

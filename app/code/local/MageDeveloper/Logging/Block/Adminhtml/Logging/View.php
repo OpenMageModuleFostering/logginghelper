@@ -32,6 +32,11 @@ class MageDeveloper_Logging_Block_Adminhtml_Logging_View extends Mage_Adminhtml_
 	            'onclick'   => 'setLocation(\'' . $nextUrl . '\')',
 	        ), -1);
 		}
+	    $this->_addButton('mail', array(
+			'label'     => Mage::helper('logging')->__('Send mail'),
+			'onclick'   => 'setLocation(\'' . $this->getSendMailUrl() . '\')',
+			'class'		=> 'add success'
+		), -1);
 		
 		$this->removeButton('reset');
 		$this->removeButton('save');
@@ -71,6 +76,17 @@ class MageDeveloper_Logging_Block_Adminhtml_Logging_View extends Mage_Adminhtml_
         	return $this->getUrl('*/*/view', array($this->_objectId => $id));
 		}
 		return false;
+	}
+	
+	/**
+	 * Get the url to send the log by mail
+	 * 
+	 * @return string
+	 */
+	public function getSendMailUrl()
+	{
+		$id = $this->getRequest()->getParam($this->_objectId);
+		return $this->getUrl('*/*/mail', array($this->_objectId => $id));
 	}
 	
 	/**

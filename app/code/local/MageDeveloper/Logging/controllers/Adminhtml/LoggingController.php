@@ -63,6 +63,24 @@ class MageDeveloper_Logging_Adminhtml_LoggingController extends Mage_Adminhtml_C
 	}
 	
 	/**
+	 * mailAction
+	 * Mails details of an logging entry
+	 * and redirects to the detail view
+	 */
+	public function mailAction()
+	{
+		$log = $this->_initLog();
+		
+        if (!$log->getId()) {
+            $this->_getSession()->addError(Mage::helper('logging')->__('This log no longer exists.'));
+            $this->_redirect('*/*/');
+            return;
+        }
+		$log->sendLogMail();
+		$this->_redirect('*/*/view', array('id' => $this->getRequest()->getParam('id')));
+	}
+	
+	/**
 	 * deleteAction
 	 */
     public function deleteAction()
@@ -135,12 +153,6 @@ class MageDeveloper_Logging_Adminhtml_LoggingController extends Mage_Adminhtml_C
         }
         $this->_redirect('*/*/index');
     }
-	
-
-	
-	
-	
-	
 	
 }
 	
