@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package>
+    <name>LoggingHelper</name>
+    <version>1.1.1</version>
+    <stability>stable</stability>
+    <license uri="http://www.gnu.org/licenses/gpl-3.0.html">GPL</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Adds an helper to your magento instance to programmatically log data to view it in the backend.</summary>
+    <description>Usage is easy, just use the helper:&#xD;
+&#xD;
+// Log data&#xD;
+Mage::helper('logging')&#xD;
+-&gt;setData($data)&#xD;
+-&gt;log();&#xD;
+&#xD;
+// Log a message&#xD;
+Mage::helper('logging')&#xD;
+-&gt;setMessage('My message')&#xD;
+-&gt;log();&#xD;
+&#xD;
+// Log Type&#xD;
+$type = Mage::helper('logging')-&gt;getTypeOk();&#xD;
+&#xD;
+Mage::helper('logging')&#xD;
+-&gt;setType($type)&#xD;
+-&gt;setMessage('Different type')&#xD;
+-&gt;log();&#xD;
+&#xD;
+&#xD;
+&#xD;
+</description>
+    <notes>Bugfix release</notes>
+    <authors><author><name>Bastian Zagar</name><user>aggy</user><email>zagar@aixdesign.net</email></author></authors>
+    <date>2013-02-20</date>
+    <time>12:00:17</time>
+    <contents><target name="magelocal"><dir name="MageDeveloper"><dir name="Logging"><dir name="Block"><dir name="Adminhtml"><dir name="Logging"><file name="Grid.php" hash="0d66a4a0dc3cd3653df8026112c5dde5"/><dir name="Renderer"><file name="LogType.php" hash="8483fabd4e2f0014e5058f3c1dd1e969"/><file name="Pre.php" hash="4614bc7122776d28c2c10420abca15a2"/></dir></dir><file name="Logging.php" hash="da1498c795ad6b81c0cb7bd81314a794"/></dir></dir><dir name="Helper"><file name="Data.php" hash="1112402df3a5ac2726eefb75de2fa79e"/></dir><dir name="Model"><file name="Log.php" hash="aa53dd949e6f500d4f66b536080d90f4"/><dir name="Mysql4"><dir name="Log"><file name="Collection.php" hash="1c107fe4e191e07b72196b7b66dc63b1"/></dir><file name="Log.php" hash="9160734fd0857439968e2236963bcca7"/></dir></dir><dir name="controllers"><dir name="Adminhtml"><file name="LoggingController.php" hash="525bbae62396b439c71b398a222439bd"/></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="b861cc7eedd55f1971357a8fe3985a42"/><file name="config.xml" hash="6283d0900d57b4a86c79432b742352d5"/></dir><dir name="sql"><dir name="magedeveloper_logging_setup"><file name="mysql4-install-1.0.0.php" hash="1fcda8eb4bc11cf3b126db7cba778f42"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="MageDeveloper_Logging.xml" hash="5e4a4a97b123a5161e121c7bcd70038d"/></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="logging.xml" hash="3f2b71f539139a6420be21cd3d90d912"/></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

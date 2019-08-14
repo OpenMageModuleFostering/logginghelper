@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/LoggingHelper",
+    "type": "magento-module",
+    "license": "GPL",
+    "homepage": "",
+    "description": "Adds an helper to your magento instance to programmatically log data to view it in the backend.",
+    "authors": [
+    {
+        "name": "Bastian Zagar",
+        "email": "zagar@aixdesign.net"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

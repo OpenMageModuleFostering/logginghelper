@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<MageDeveloper_Logging>
+			<version>1.1.1</version>
+		</MageDeveloper_Logging>
+	</modules>
+	<global>
+		<blocks>
+			<logging>
+				<class>MageDeveloper_Logging_Block</class>
+			</logging>
+		</blocks>
+		<helpers>
+			<logging>
+				<class>MageDeveloper_Logging_Helper</class>
+			</logging>
+		</helpers>
+		<models>
+			<logging>
+				<class>MageDeveloper_Logging_Model</class>
+				<resourceModel>log_mysql4</resourceModel>
+			</logging>
+			<log_mysql4>
+                <class>MageDeveloper_Logging_Model_Mysql4</class>
+                <entities>
+                    <log>
+                        <table>log_entity</table>
+                    </log>
+                </entities>
+            </log_mysql4>
+        </models>	
+		<resources>
+			<magedeveloper_logging_setup>
+				<setup>
+					<module>MageDeveloper_Logging</module>
+					<class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+				</setup>
+			</magedeveloper_logging_setup>
+            <logging_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </logging_read>
+            <logging_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </logging_write>
+		</resources>
+	</global>
+	<frontend>
+		<routers>
+            <logging>
+                <use>standard</use>
+                <args>
+                    <module>MageDeveloper_Logging</module>
+                    <frontName>logging</frontName>
+                </args>
+            </logging>
+        </routers>
+	</frontend>
+	
+	
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <logging before="Mage_Adminhtml">MageDeveloper_Logging_Adminhtml</logging>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+	
+ 	<adminhtml>
+        <layout>
+            <updates>
+                <logging>
+                    <file>logging.xml</file>
+                </logging>
+            </updates>
+        </layout>
+    </adminhtml>   
+	
+</config>
