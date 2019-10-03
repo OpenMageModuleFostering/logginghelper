@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 Adds an helper to your magento instance to programmatically log data to view it in the backend.
